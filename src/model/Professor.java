@@ -1,37 +1,42 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Professor extends Servidor{
 
 	private static final long serialVersionUID = 1L;
 	private boolean coordenador;
-	private Disciplina disciplina;
+	private ArrayList<Disciplina>disciplinas;
 
-	public Professor(){
-		super();
-	}
-	
-	public Professor(String nome, String cpf, String email, Usuario usuario, LocalDate dataNascimento,String siape, boolean coordenador, Disciplina disciplina){
-		super(nome,cpf,email,usuario,dataNascimento,siape);
-		this.coordenador=coordenador;
-		this.cargo = EnumCargo.PROFESSOR;
-		this.setDisciplina(disciplina);
-	}
+    public Professor(){
+        super();
+        this.disciplinas = new ArrayList<Disciplina>();
+    }
+    
+    public Professor(String nome, String cpf, String email, Usuario usuario, LocalDate dataNascimento,String siape, boolean coordenador){
+        super(nome,cpf,email,usuario,dataNascimento,siape);
+        this.coordenador=coordenador;
+        this.cargo = EnumCargo.PROFESSOR;
+    }
 
-	public boolean isCoordenador() {
-		return coordenador;
-	}
+    public boolean isCoordenador() {
+        return coordenador;
+    }
 
-	public void setCoordenador(boolean coordenador) {
-		this.coordenador = coordenador;
-	}
+    public void setCoordenador(boolean coordenador) {
+        this.coordenador = coordenador;
+    }
 
-	public Disciplina getDisciplina() {
-		return disciplina;
-	}
+    public ArrayList<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
 
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplina = disciplina;
-	}
+    public void setDisciplinas(Disciplina disciplina) {
+        if(disciplina==null)
+            throw new IllegalArgumentException("Disciplina inválida");
+        this.disciplinas.add(disciplina);        
+    }
+    
+
 }
