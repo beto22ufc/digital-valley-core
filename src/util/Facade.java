@@ -44,12 +44,12 @@ public class Facade {
 		Pessoa pessoa = DAOFactory.criarPessoaDAO().buscarPorId(id);
 		String imagem = pessoa.getImagem();
 		if (imagem != null && !imagem.trim().isEmpty()) {
-			return Constantes.getUSER_PROFILE_IMAGES_DIR()+File.separator+imagem;	
-		}else {
+			return Constantes.getUSER_PROFILE_IMAGES_DIR() + File.separator + imagem;
+		} else {
 			return Constantes.getUSER_PROFILE_NONE_IMAGE_DIR();
 		}
-	} 
-	
+	}
+
 	public static void cadastrarPessoa(Pessoa pessoa, Usuario usuario) {
 
 		PessoaDAO pessoaDAO = DAOFactory.criarPessoaDAO();
@@ -67,12 +67,12 @@ public class Facade {
 		Pessoa p = pDAO.buscarPorLogin(login);
 		Aluno aluno = DAOFactory.criarAlunoDAO().buscar(p.getId());
 		Servidor servidor = DAOFactory.criarServidorDAO().buscar(p.getId());
-		if(aluno != null){
+		if (aluno != null) {
 			return aluno.getUsuario();
-		}else if (servidor != null){
+		} else if (servidor != null) {
 			return servidor.getUsuario();
 		}
-			
+
 		return null;
 	}
 
@@ -80,14 +80,15 @@ public class Facade {
 		PessoaDAO pDAO = DAOFactory.criarPessoaDAO();
 		return pDAO.buscarPorMatriculaAndCPF(matricula, cpf).getUsuario();
 	}
-	public static Usuario buscarPorSiapeAndCPF(String siape, String cpf){
+
+	public static Usuario buscarPorSiapeAndCPF(String siape, String cpf) {
 		PessoaDAO pDao = DAOFactory.criarPessoaDAO();
 		return pDao.buscarPorSiapeAndCPF(siape, cpf);
 	}
 
 	public static String[] lerArquivoBancoDeDados() {
 		String[] bd = new String[3];
-		try {			
+		try {
 			FileReader arquivo = new FileReader(Constantes.getDatabaseConfDir());
 			BufferedReader reader = new BufferedReader(arquivo);
 			try {
@@ -142,19 +143,19 @@ public class Facade {
 		AlunoDAO aDAO = DAOFactory.criarAlunoDAO();
 		return aDAO.listar();
 	}
-	
+
 	public static List<Pessoa> buscarPessoasPorNome(String nome, int inicio, int fim) {
 		return DAOFactory.criarPessoaDAO().buscarPorNome(nome, inicio, fim);
 	}
-	
+
 	public static Integer getQuantidadePessoasPorNome(String nome) {
 		return DAOFactory.criarPessoaDAO().getQuantidadePorNome(nome);
 	}
-	
+
 	public static List<Aluno> buscarAlunosPorNome(String nome, int inicio, int fim) {
 		return DAOFactory.criarAlunoDAO().buscarPorNome(nome, inicio, fim);
 	}
-	
+
 	public static Integer getQuantidadeAlunosPorNome(String nome) {
 		return DAOFactory.criarAlunoDAO().getQuantidadePorNome(nome);
 	}
@@ -194,10 +195,10 @@ public class Facade {
 		return pDAO.Listar();
 	}
 
-	public static void inserirToken(Pessoa pessoa){
+	public static void inserirToken(Pessoa pessoa) {
 		PessoaDAO pDAO = DAOFactory.criarPessoaDAO();
 		pDAO.inserirTokenRecuperacao(pessoa);
-		
+
 	}
 
 	public static Pessoa BuscarEmailVinculado(String email) {
@@ -214,15 +215,15 @@ public class Facade {
 		ServidorDAO sDAO = DAOFactory.criarServidorDAO();
 		return sDAO.buscarPorNome(nome);
 	}
-	
-	public static Pessoa verificarTokenRecuperacao(String token){
+
+	public static Pessoa verificarTokenRecuperacao(String token) {
 		Aluno aluno = DAOFactory.criarAlunoDAO().buscarTokenRecuperacao(token);
 		Servidor servidor = DAOFactory.criarServidorDAO().buscarPorToken(token);
-		if(aluno != null){
+		if (aluno != null) {
 			return aluno;
-		}else if(servidor != null){
+		} else if (servidor != null) {
 			return servidor;
-		}else{
+		} else {
 			return null;
 		}
 	}
@@ -240,5 +241,20 @@ public class Facade {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
 		return localDate.format(formatter);
 	}
-	
+
+	public static LocalDate converterStringParaLocalDate(String data) {
+
+		String[] newDate = data.split("/");
+		String[] dataSql = data.split("-");
+		if (newDate.length == 3) {
+			return LocalDate.of(Integer.valueOf(newDate[2]), Integer.valueOf(newDate[1]), Integer.valueOf(newDate[0]));
+		}
+		if (dataSql.length == 3) {
+			return LocalDate.of(Integer.valueOf(dataSql[0]), Integer.valueOf(dataSql[1]), Integer.valueOf(dataSql[2]));
+		} else {
+			throw new RuntimeException(
+					"Erro: A data de nascimento não está no formato correto, valor informado " + data);
+		}
+
+	}
 }
