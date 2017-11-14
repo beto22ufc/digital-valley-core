@@ -94,7 +94,44 @@ public class JDBCProfessorDAO extends JDBCDAO implements ProfessorDAO{
 			super.close();
 		}
 	}
+	
+	@Override
+	public Professor buscarPorSiape(String siape) {
+		super.open();
+		String SQL = "SELECT * FROM servidor AS s, professor AS prof, pessoa_usuario AS u WHERE s.siape = ? AND s.id_pessoa_usuario = u.id_pessoa_usuario AND u.id_pessoa_usuario =  prof.id_pessoa_prof";
+		try {
 
+			PreparedStatement ps = super.getConnection().prepareStatement(SQL);
+			ps.setString(1, siape);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()){
+				Professor professor = new Professor();
+				professor.setCoordenador(rs.getBoolean("coordenador"));
+				professor.setId(rs.getInt("id_pessoa_prof"));
+				professor.setNome(rs.getString("nome"));
+				professor.setCpf(rs.getString("cpf"));
+				professor.setDataNascimento(LocalDate.parse(rs.getString("data_nascimento")));
+				professor.setEmail(rs.getString("email"));
+				professor.setSiape(rs.getString("siape"));
+				rs.close();
+				ps.close();
+				
+				return professor;
+			}else{
+				return null;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Erro ao buscar registro de professor", e);
+		}finally {
+			super.close();
+		}
+	}
+
+	
 	@Override
 	public List<Professor> listar() {
 		super.open();
