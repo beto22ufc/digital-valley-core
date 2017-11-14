@@ -13,6 +13,4 @@ public interface ProfessorDAO {
 	public Professor buscarPorSiape(String siape);
 	
 	public List<Professor> listar();
-
-	void editar(Professor professor);
 }

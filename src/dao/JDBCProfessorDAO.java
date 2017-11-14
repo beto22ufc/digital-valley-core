@@ -22,14 +22,12 @@ public class JDBCProfessorDAO extends JDBCDAO implements ProfessorDAO{
 	public void cadastrar(Professor professor) {
 		super.open();
 		try {
-			String SQL = "INSERT INTO professor (coordenador, id_pessoa_prof) VALUES " + " (?,?)";
+			String SQL = "INSERT INTO professor (id_pessoa_prof) VALUES " + " (?)";
 			PreparedStatement ps = super.getConnection().prepareStatement(SQL);
 			
-			ps.setBoolean(1, professor.isCoordenador());
-			ps.setInt(2, professor.getId());
+			ps.setInt(1, professor.getId());
 			ps.executeUpdate();
-			ps.close();
-			
+			ps.close();			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -38,25 +36,6 @@ public class JDBCProfessorDAO extends JDBCDAO implements ProfessorDAO{
 			super.close();
 		}
 		
-	}
-	@Override
-	public void editar(Professor professor) {
-		super.open();
-		try {
-			String SQL = "UPDATE professor SET coordenador=? WHERE id_pessoa_prof=?";
-			PreparedStatement ps = super.getConnection().prepareStatement(SQL);
-			ps.setBoolean(1, professor.isCoordenador());
-			ps.setInt(2,  professor.getId());
-			ps.executeUpdate();
-			ps.close();
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException("Erro ao editar registro de professor", e);
-		}finally {
-			super.close();
-		}
-
 	}
 
 	@Override
@@ -71,8 +50,7 @@ public class JDBCProfessorDAO extends JDBCDAO implements ProfessorDAO{
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()){
-				Professor professor = new Professor();
-				professor.setCoordenador(rs.getBoolean("coordenador"));
+				Professor professor = new Professor();				
 				professor.setId(rs.getInt("id_pessoa_prof"));
 				professor.setNome(rs.getString("nome"));
 				professor.setCpf(rs.getString("cpf"));
@@ -107,8 +85,7 @@ public class JDBCProfessorDAO extends JDBCDAO implements ProfessorDAO{
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()){
-				Professor professor = new Professor();
-				professor.setCoordenador(rs.getBoolean("coordenador"));
+				Professor professor = new Professor();				
 				professor.setId(rs.getInt("id_pessoa_prof"));
 				professor.setNome(rs.getString("nome"));
 				professor.setCpf(rs.getString("cpf"));
@@ -142,8 +119,7 @@ public class JDBCProfessorDAO extends JDBCDAO implements ProfessorDAO{
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				Professor professor = new Professor();
-				professor.setCoordenador(rs.getBoolean("coordenador"));
+				Professor professor = new Professor();				
 				professor.setId(rs.getInt("id_pessoa_prof"));
 				professor.setNome(rs.getString("nome"));
 				professor.setCpf(rs.getString("cpf"));
