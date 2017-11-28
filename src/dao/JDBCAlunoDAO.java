@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Aluno;
 import model.Curso;
 import model.Usuario;

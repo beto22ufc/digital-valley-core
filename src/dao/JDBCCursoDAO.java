@@ -51,9 +51,27 @@ public class JDBCCursoDAO extends JDBCDAO implements CursoDAO{
 	}
 
 	@Override
-	public Curso buscar(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Curso buscar(int id) {		
+		try {
+			super.open();		
+			Curso curso = null;
+			PreparedStatement ps = super.getConnection().prepareStatement("SELECT * FROM curso WHERE id_curso = ?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				curso = new Curso();
+				curso.setNome(rs.getString("nome_curso"));
+				curso.setId(rs.getInt("id_curso"));			
+				ps.close();
+				rs.close();
+			}
+			return curso;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Erro ao buscar registro do curso"+e.getMessage());
+		}finally {
+			super.close();
+		}
 	}
 	
 	@Override
