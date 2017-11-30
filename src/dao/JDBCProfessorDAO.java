@@ -160,11 +160,6 @@ public class JDBCProfessorDAO extends JDBCDAO implements ProfessorDAO{
 				Professor professor = new Professor();				
 				professor.setId(rs.getInt("id_pessoa_prof"));
 				professor.setNome(rs.getString("nome"));
-				professor.setCpf(rs.getString("cpf"));
-				professor.setDataNascimento(LocalDate.parse(rs.getString("data_nascimento")));
-				professor.setEmail(rs.getString("email"));
-				professor.setSiape(rs.getString("siape"));
-				
 				professores.add(professor);
 				
 			}
