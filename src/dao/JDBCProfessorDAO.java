@@ -145,5 +145,44 @@ public class JDBCProfessorDAO extends JDBCDAO implements ProfessorDAO{
 		}
 
 	}
+	
+	@Override
+	public List<Professor> buscarContains(String nome) {
+		super.open();
+		List<Professor> professores = new ArrayList<Professor>();
+		try {
+			String SQL = "SELECT id_pessoa_prof, nome FROM professor AS p, pessoa_usuario AS u WHERE u.id_pessoa_usuario = p.id_pessoa_prof AND UPPER(u.nome) like UPPER(?)";
+			PreparedStatement ps = super.getConnection().prepareStatement(SQL);
+			ps.setString(1, '%'+nome+'%');
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				Professor professor = new Professor();				
+				professor.setId(rs.getInt("id_pessoa_prof"));
+				professor.setNome(rs.getString("nome"));
+				professor.setCpf(rs.getString("cpf"));
+				professor.setDataNascimento(LocalDate.parse(rs.getString("data_nascimento")));
+				professor.setEmail(rs.getString("email"));
+				professor.setSiape(rs.getString("siape"));
+				
+				professores.add(professor);
+				
+			}
+
+			ps.close();
+			rs.close();
+			
+			return professores;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Falha ao listar professor em JDBCProfessorDAO", e);
+
+		}finally {
+			super.close();
+		}
+
+	}
+
 
 }
