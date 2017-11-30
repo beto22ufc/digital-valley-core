@@ -2,7 +2,6 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>br.com.n2s</groupId>
   <artifactId>digital-valley-core</artifactId>
-  <version>1.0</version>
   <packaging>war</packaging>
   <build>
     <sourceDirectory>src</sourceDirectory>
@@ -52,4 +51,5 @@
 		</dependency>		
 		
 	</dependencies>
+	<version>1.4</version>
 </project>
