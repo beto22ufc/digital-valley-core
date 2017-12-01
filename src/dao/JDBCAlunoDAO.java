@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Aluno;
 import model.Curso;
 import model.Usuario;
@@ -68,7 +67,7 @@ public class JDBCAlunoDAO extends JDBCDAO implements AlunoDAO {
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setNivel(rs.getInt("nivel"));
-				usuario.setPessoa(aluno);
+
 				aluno.setUsuario(usuario);
 				aluno.setMatricula(rs.getString("matricula"));
 				aluno.setSemestreIngresso(rs.getString("semestre_ingresso"));
@@ -78,7 +77,7 @@ public class JDBCAlunoDAO extends JDBCDAO implements AlunoDAO {
 				aluno.setCpf(rs.getString("cpf"));
 				aluno.setDataNascimento(LocalDate.parse(rs.getString("data_nascimento")));
 				aluno.setEmail(rs.getString("email"));
-				
+				usuario.setPessoa(aluno);
 				rs.close();
 				ps.close();
 				
@@ -112,15 +111,22 @@ public class JDBCAlunoDAO extends JDBCDAO implements AlunoDAO {
 				Curso curso = new Curso();
 				Usuario usuario = new Usuario();
 				curso.setId(rs.getInt("id_curso"));
+				curso.setNome(rs.getString("nome_curso"));
+				usuario.setLogin(rs.getString("login"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setNivel(rs.getInt("nivel"));
+				
+				aluno.setUsuario(usuario);
 				aluno.setMatricula(rs.getString("matricula"));
 				aluno.setSemestreIngresso(rs.getString("semestre_ingresso"));
 				aluno.setId(rs.getInt("id_pessoa_usuario"));
 				aluno.setCurso(curso);
 				aluno.setNome(rs.getString("nome"));
-				usuario.setLogin(rs.getString("login"));
-				usuario.setSenha(rs.getString("senha"));
-				aluno.setUsuario(usuario);
+				aluno.setCpf(rs.getString("cpf"));
+				aluno.setDataNascimento(LocalDate.parse(rs.getString("data_nascimento")));
+				aluno.setEmail(rs.getString("email"));
 				
+				usuario.setPessoa(aluno);		
 				
 				rs.close();
 				ps.close();
