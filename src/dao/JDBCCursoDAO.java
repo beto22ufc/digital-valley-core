@@ -19,7 +19,7 @@ public class JDBCCursoDAO extends JDBCDAO implements CursoDAO{
 	public void cadastrar(Curso curso) {
 		super.open();
 		try {
-			String SQL = "INSERT INTO curso(nome_curso, id_curso) VALUES (?, ?)";
+			String SQL = "INSERT INTO curso(nome_curso, id_curso, professor_coordenador_id) VALUES (?, ?, ?)";
 			PreparedStatement ps = super.getConnection().prepareStatement(SQL);
 
 			ps.setString(1, curso.getNome());
@@ -61,7 +61,9 @@ public class JDBCCursoDAO extends JDBCDAO implements CursoDAO{
 			if (rs.next()) {
 				curso = new Curso();
 				curso.setNome(rs.getString("nome_curso"));
-				curso.setId(rs.getInt("id_curso"));			
+				curso.setId(rs.getInt("id_curso"));
+				curso.setCoordenador(DAOFactory.criarProfessorDAO().buscar(rs.getInt("professor_coordenador_id")));
+						
 				ps.close();
 				rs.close();
 			}

@@ -15,6 +15,7 @@ import dao.PessoaDAO;
 import dao.ServidorDAO;
 import dao.UsuarioDAO;
 import model.Aluno;
+import model.Curso;
 import model.Pessoa;
 import model.Servidor;
 import model.Usuario;
@@ -155,7 +156,7 @@ public class Facade {
 	public static List<Aluno> buscarAlunosPorNome(String nome, int inicio, int fim) {
 		return DAOFactory.criarAlunoDAO().buscarPorNome(nome, inicio, fim);
 	}
-
+	
 	public static Integer getQuantidadeAlunosPorNome(String nome) {
 		return DAOFactory.criarAlunoDAO().getQuantidadePorNome(nome);
 	}
