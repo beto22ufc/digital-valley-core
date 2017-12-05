@@ -51,7 +51,7 @@ public class JDBCAlunoDAO extends JDBCDAO implements AlunoDAO {
 	public Aluno buscar(int id) {
 		super.open();
 		try {
-			String SQL = "SELECT * FROM aluno AS u_a, pessoa_usuario AS u, curso AS c WHERE u_a.id_pessoa_usuario=? AND u_a.id_pessoa_usuario = u.id_pessoa_usuario AND u_a.id_curso = c.id_curso";
+			String SQL = "SELECT * FROM aluno AS u_a, pessoa_usuario AS u WHERE u_a.id_pessoa_usuario=? AND u_a.id_pessoa_usuario = u.id_pessoa_usuario";
 
 			PreparedStatement ps = super.getConnection().prepareStatement(SQL);
 			ps.setInt(1, id);
@@ -60,13 +60,8 @@ public class JDBCAlunoDAO extends JDBCDAO implements AlunoDAO {
 
 			if(rs.next()){
 				Aluno aluno = new Aluno();
-				Curso curso = new Curso();
+				Curso curso = DAOFactory.criarCursoDAO().buscar(rs.getInt("id_curso"));
 				Usuario usuario = new Usuario();
-				curso.setId(rs.getInt("id_curso"));
-				curso.setNome(rs.getString("nome_curso"));
-				usuario.setLogin(rs.getString("login"));
-				usuario.setSenha(rs.getString("senha"));
-				usuario.setNivel(rs.getInt("nivel"));
 
 				aluno.setUsuario(usuario);
 				aluno.setMatricula(rs.getString("matricula"));
