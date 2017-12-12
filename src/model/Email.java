@@ -58,7 +58,7 @@ public class Email {
 		}
 	}
 
-	public void sendEmailWithAttachment(String assunto, String mensagem, String fromEmail, String nomeTo, String filename) {
+	public void sendEmailWithAttachment(String assunto, String mensagem, String fromEmail, String nomeTo, String localfile, String filename) {
 		String[] ls = util.Facade.lerArquivoEmail();
 		try {
 			MimeMessage msg = new MimeMessage(this.createSessionMail());
@@ -72,7 +72,7 @@ public class Email {
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(messageBodyPart);
 			messageBodyPart = new MimeBodyPart();
-			DataSource source = new FileDataSource(filename);
+			DataSource source = new FileDataSource(localfile);
 			messageBodyPart.setDataHandler(new DataHandler(source));
 			messageBodyPart.setFileName(filename);
 			multipart.addBodyPart(messageBodyPart);
