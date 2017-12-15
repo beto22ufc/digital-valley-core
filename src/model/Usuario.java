@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 
+import util.Crypter;
+
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -22,14 +24,14 @@ public class Usuario implements Serializable {
 	public Usuario(String login, String senha, Pessoa pessoa) {
 		super();
 		this.login = login;
-		this.senha = senha;
+		this.setSenha(senha);
 		this.nivel = EnumNivel.COMUM;
 		this.pessoa = pessoa;
 	}
 	public Usuario(String login, String senha) {
 		super();
 		this.login = login;
-		this.senha = senha;
+		this.setSenha(senha);
 		this.nivel = EnumNivel.COMUM;
 	}
 	
@@ -51,7 +53,7 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		if(senha != null && senha.length() >= 6){
-			this.senha = senha;
+			this.senha = Crypter.crypt(senha);
 		}else{
 			throw new IllegalArgumentException("Erro: O valor da senha não pode ser nulo e deve possuir pelo menos 6 caracteres, valor informado: "+senha);
 		}
