@@ -2,7 +2,7 @@ package model;
 
 public enum EnumCargo {
 	
-	PROFESSOR("Professor"), SECRETARIO("Secretário"), FUNCIONARIO("Funcionário");
+	PROFESSOR("Professor"), SECRETARIO("Secretario"), FUNCIONARIO("Funcionario");
 
 	public String cargo;
 
