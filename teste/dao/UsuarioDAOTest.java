@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import dao.UsuarioDAO;
 import model.EnumNivel;
+import model.EnumPerfil;
 import model.Pessoa;
 import model.Usuario;
 
@@ -31,12 +32,16 @@ public class UsuarioDAOTest {
 	}
 	
 	//Passou no teste
-	@Ignore
+
 	@Test
 	public void editar(){
 		usuario.setLogin("Joao");
 		usuario.setSenha("987123");
+		usuario.setNivel(2);
+		usuario.setPerfil(EnumPerfil.ADMINISTRADOR);
+		
 		Pessoa p = new Pessoa();
+		p.setId(92);
 
 		usuario.setPessoa(p);
 		

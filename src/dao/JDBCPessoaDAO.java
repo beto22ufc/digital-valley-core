@@ -113,6 +113,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 				pessoa.getUsuario().setLogin(rs.getString("login"));
 				pessoa.getUsuario().setSenha(rs.getString("senha"));
 				pessoa.getUsuario().setNivel(rs.getInt("nivel"));
+				pessoa.getUsuario().setPerfil(rs.getInt("perfil"));
 				pessoa.getUsuario().setPessoa(pessoa);
 				pessoa.getUsuario().setToken(rs.getString("token_sessao"));
 				pessoa.getUsuario().setTokenUsuario(rs.getString("token_usuario"));
@@ -159,6 +160,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 				pessoa.getUsuario().setLogin(rs.getString("login"));
 				pessoa.getUsuario().setSenha(rs.getString("senha"));
 				pessoa.getUsuario().setNivel(rs.getInt("nivel"));
+				pessoa.getUsuario().setPerfil(rs.getInt("perfil"));
 				pessoa.getUsuario().setPessoa(pessoa);
 				ps.close();
 				rs.close();
@@ -203,6 +205,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setNivel(rs.getInt("nivel"));
+				pessoa.getUsuario().setPerfil(rs.getInt("perfil"));
 				usuario.setPessoa(pessoa);
 				ps.close();
 				rs.close();
@@ -249,6 +252,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 				pessoa.getUsuario().setPessoa(pessoa);
 				pessoa.getUsuario().setToken(rs.getString("token_sessao"));
 				pessoa.getUsuario().setTokenUsuario(rs.getString("token_usuario"));
+				pessoa.getUsuario().setPerfil(rs.getInt("perfil"));
 				ps.close();
 				rs.close();
 				return pessoa;
@@ -291,6 +295,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 				pessoa.getUsuario().setSenha(rs.getString("senha"));
 				pessoa.getUsuario().setNivel(rs.getInt("nivel"));
 				pessoa.getUsuario().setPessoa(pessoa);
+				pessoa.getUsuario().setPerfil(rs.getInt("perfil"));
 				ps.close();
 				rs.close();
 				return pessoa;
@@ -328,6 +333,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 				pessoa.getUsuario().setLogin(rs.getString("login"));
 				pessoa.getUsuario().setSenha(rs.getString("senha"));
 				pessoa.getUsuario().setNivel(rs.getInt("nivel"));
+				pessoa.getUsuario().setPerfil(rs.getInt("perfil"));
 				pessoas.add(pessoa);
 
 			}
@@ -371,6 +377,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setNivel(rs.getInt("nivel"));
+				pessoa.getUsuario().setPerfil(rs.getInt("perfil"));
 				pessoa.setUsuario(usuario);
 
 				pessoas.add(pessoa);
@@ -413,6 +420,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setNivel(rs.getInt("nivel"));
+				pessoa.getUsuario().setPerfil(rs.getInt("perfil"));
 				usuario.setPessoa(pessoa);
 				pessoa.setUsuario(usuario);
 				ps.close();
@@ -452,6 +460,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 				pessoa.getUsuario().setLogin(rs.getString("login"));
 				pessoa.getUsuario().setSenha(rs.getString("senha"));
 				pessoa.getUsuario().setNivel(rs.getInt("nivel"));
+				pessoa.getUsuario().setPerfil(rs.getInt("perfil"));
 				pessoa.getUsuario().setPessoa(pessoa);
 				pessoas.add(pessoa);
 			}
@@ -567,6 +576,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 				pessoa.getUsuario().setLogin(rs.getString("login"));
 				pessoa.getUsuario().setSenha(rs.getString("senha"));
 				pessoa.getUsuario().setNivel(rs.getInt("nivel"));
+				pessoa.getUsuario().setPerfil(rs.getInt("perfil"));
 				pessoa.getUsuario().setPessoa(pessoa);
 				pessoas.add(pessoa);
 			}
@@ -603,6 +613,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 				pessoa.getUsuario().setLogin(rs.getString("login"));
 				pessoa.getUsuario().setSenha(rs.getString("senha"));
 				pessoa.getUsuario().setNivel(rs.getInt("nivel"));
+				pessoa.getUsuario().setPerfil(rs.getInt("perfil"));
 				pessoa.getUsuario().setPessoa(pessoa);
 				pessoas.add(pessoa);
 			}

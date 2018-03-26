@@ -15,10 +15,21 @@ public class UsuarioTest {
 	public void senhaInvalido(){
 		this.usuario.setSenha("12345");
 	}
+	@Test(expected=IllegalArgumentException.class)
+	public void enumInvalido(){
+		EnumPerfil e =null;
+		this.usuario.setPerfil(e);		
+	}
+	
 	@Test
 	public void valido(){
 		this.usuario.setLogin("admin");
 		this.usuario.setSenha("123456");
 	}
+	
+	
+		
+	
+	
 	
 }

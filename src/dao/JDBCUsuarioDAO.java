@@ -16,13 +16,14 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
 	public void cadastrar(Usuario usuario) {
 		super.open();
 		try {
-			String SQL = "UPDATE pessoa_usuario SET login=?, senha=?, nivel=? WHERE id_pessoa_usuario=?";
+			String SQL = "UPDATE pessoa_usuario SET login=?, senha=?, nivel=?, perfil=? WHERE id_pessoa_usuario=?";
 			PreparedStatement ps = super.getConnection().prepareStatement(SQL);
 
 			ps.setString(1, usuario.getLogin());
 			ps.setString(2, usuario.getSenha());
 			ps.setInt(3, usuario.getNivel() != null ? usuario.getNivel().getValorNivel() : 2);
-			ps.setInt(4, usuario.getPessoa().getId());
+			ps.setInt(4, usuario.getPerfil().getValorPerfil());
+			ps.setInt(5, usuario.getPessoa().getId());
 			ps.executeUpdate();
 			ps.close();
 
@@ -39,11 +40,12 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
 	public void editar(Usuario usuario) {
 		super.open();
 		try {
-			String SQL = "UPDATE pessoa_usuario SET login=?, nivel=? WHERE id_pessoa_usuario = ?";
+			String SQL = "UPDATE pessoa_usuario SET login=?, nivel=?, perfil=? WHERE id_pessoa_usuario = ?";
 			PreparedStatement ps = super.getConnection().prepareStatement(SQL);
 			ps.setString(1, usuario.getLogin());
 			ps.setInt(2, usuario.getNivel().getValorNivel());
-			ps.setInt(3, usuario.getPessoa().getId());
+			ps.setInt(3, usuario.getPerfil().getValorPerfil());
+			ps.setInt(4, usuario.getPessoa().getId());
 			ps.executeUpdate();
 			ps.close();
 

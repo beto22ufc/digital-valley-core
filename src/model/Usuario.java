@@ -12,6 +12,7 @@ public class Usuario implements Serializable {
 	private String senha;
 	private Pessoa pessoa;
 	private EnumNivel nivel;
+	private EnumPerfil perfil;
 	private String token;
 	private String tokenUsuario;
 
@@ -33,6 +34,7 @@ public class Usuario implements Serializable {
 		this.login = login;
 		this.setSenha(senha);
 		this.nivel = EnumNivel.COMUM;
+		this.perfil = EnumPerfil.VISITANTE;
 	}
 	
 	public String getLogin() {
@@ -60,6 +62,37 @@ public class Usuario implements Serializable {
 	}
 	public EnumNivel getNivel() {
 		return nivel;
+	}
+	
+	public EnumPerfil getPerfil() {
+		return perfil;
+	}
+	public void setPerfil(EnumPerfil perfil) {
+		if(perfil != null) {
+			this.perfil = perfil;
+		}else {
+			throw new IllegalArgumentException("Erro: O valor do perfil não pode ser nulo, valor informado: "+perfil);
+		}
+	}
+	
+	public void setPerfil(int perfil) {
+		switch (perfil) {
+		case 1:
+			this.perfil = EnumPerfil.ADMINISTRADOR; 
+			break;
+		case 2:
+			this.perfil = EnumPerfil.ALUNO;
+			break;
+		case 3:
+			this.perfil = EnumPerfil.SERVIDOR;
+			break;	
+		case 4:
+			this.perfil = EnumPerfil.VISITANTE;
+			break;
+		default:
+			throw new IllegalArgumentException("Erro: O valor do perfil não pode ser nulo ou invalido, valor informado: "+perfil);
+			
+		}
 	}
 	
 	

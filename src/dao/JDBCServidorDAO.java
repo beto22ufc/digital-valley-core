@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Aluno;
 import model.Servidor;
 import model.Usuario;
 
@@ -40,6 +41,30 @@ public class JDBCServidorDAO extends JDBCDAO implements ServidorDAO {
 	}
 
 	@Override
+	public void editar(Servidor servidor) {
+		super.open();
+		try {
+			String SQL = "UPDATE public.servidor SET siape=?, cargo=? WHERE id_pessoa_usuario = ?";
+
+			PreparedStatement ps = super.getConnection().prepareStatement(SQL);
+			ps.setString(1, servidor.getSiape());
+			ps.setString(2, servidor.getCargo().getCargo());
+			ps.setInt(3, servidor.getId());
+			
+			ps.executeUpdate();
+			ps.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Erro ao editar registro de servidor: "+ e.getMessage());
+		}finally {
+			super.close();
+		}
+
+	}
+	
+	
+	@Override
 	public Servidor buscar(int id) {
 		super.open();
 		Servidor servidor = new Servidor();
@@ -64,6 +89,7 @@ public class JDBCServidorDAO extends JDBCDAO implements ServidorDAO {
 				servidor.setId(rs.getInt("id_pessoa_usuario"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setNivel(rs.getInt("nivel"));
+				usuario.setPerfil(rs.getInt("perfil"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setPessoa(servidor);
 				servidor.setUsuario(usuario);
@@ -109,6 +135,7 @@ public class JDBCServidorDAO extends JDBCDAO implements ServidorDAO {
 				servidor.setId(rs.getInt("id_pessoa_usuario"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setNivel(rs.getInt("nivel"));
+				usuario.setPerfil(rs.getInt("perfil"));
 				usuario.setSenha(rs.getString("senha"));
 				servidor.setUsuario(usuario);
 
@@ -153,6 +180,7 @@ public class JDBCServidorDAO extends JDBCDAO implements ServidorDAO {
 				servidor.setId(rs.getInt("id_pessoa_usuario"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setNivel(rs.getInt("nivel"));
+				usuario.setPerfil(rs.getInt("perfil"));
 				usuario.setSenha(rs.getString("senha"));
 				servidor.setUsuario(usuario);
 
@@ -194,6 +222,7 @@ public class JDBCServidorDAO extends JDBCDAO implements ServidorDAO {
 				servidor.setId(rs.getInt("id_pessoa_usuario"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setNivel(rs.getInt("nivel"));
+				usuario.setPerfil(rs.getInt("perfil"));
 				usuario.setSenha(rs.getString("senha"));
 				servidor.setUsuario(usuario);
 
@@ -239,6 +268,7 @@ public class JDBCServidorDAO extends JDBCDAO implements ServidorDAO {
 				servidor.setId(rs.getInt("id_pessoa_usuario"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setNivel(rs.getInt("nivel"));
+				usuario.setPerfil(rs.getInt("perfil"));
 				usuario.setSenha(rs.getString("senha"));
 				servidor.setUsuario(usuario);
 
@@ -272,6 +302,7 @@ public class JDBCServidorDAO extends JDBCDAO implements ServidorDAO {
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setNivel(rs.getInt("nivel"));
+				usuario.setPerfil(rs.getInt("perfil"));
 				servidor.setUsuario(usuario);
 				servidor.setId(rs.getInt("id_pessoa_usuario"));
 				servidor.setCpf(rs.getString("cpf"));

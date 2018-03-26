@@ -19,10 +19,10 @@ public enum EnumCargo {
 		case "Professor":
 			return EnumCargo.PROFESSOR;
 			
-		case "Secretário":
+		case "Secretario":
 			return EnumCargo.SECRETARIO;
 			
-		case "Funcionário":
+		case "Funcionario":
 			return EnumCargo.FUNCIONARIO;
 		
 

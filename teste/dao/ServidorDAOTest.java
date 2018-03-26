@@ -5,6 +5,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import model.EnumCargo;
 import model.Servidor;
 
 public class ServidorDAOTest {
@@ -19,6 +21,17 @@ public class ServidorDAOTest {
 
 		servidor.setId(75);
 		sdao.cadastrar(servidor);
+	}
+	
+	@Ignore
+	@Test
+	public void testEditar() {
+		servidor.setSiape("6545644");
+		servidor.setId(5);
+		servidor.setCargo(EnumCargo.PROFESSOR);
+		
+		ServidorDAO sdao = DAOFactory.criarServidorDAO();
+		sdao.editar(servidor);
 	}
 
 	@Ignore
@@ -47,6 +60,7 @@ public class ServidorDAOTest {
 		
 	}
 	
+	@Ignore
 	@Test
 	public void testBuscarToken(){
 		ServidorDAO sDAO = DAOFactory.criarServidorDAO();
