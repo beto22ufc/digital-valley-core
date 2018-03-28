@@ -20,8 +20,8 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 	public void cadastrar(Pessoa pessoa) {
 		super.open();
 		try {
-			String SQL = "INSERT INTO pessoa_usuario (nome, cpf, email , data_nascimento,login,senha) VALUES"
-					+ "(?,?,?,?,?,?)";
+			String SQL = "INSERT INTO pessoa_usuario (nome, cpf, email , data_nascimento,login,senha,perfil) VALUES"
+					+ "(?,?,?,?,?,?,?)";
 
 			PreparedStatement ps = super.getConnection().prepareStatement(SQL);
 
@@ -31,6 +31,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 			ps.setDate(4, Date.valueOf(pessoa.getDataNascimento()));
 			ps.setString(5, pessoa.getUsuario().getLogin());
 			ps.setString(6, pessoa.getUsuario().getSenha());
+			ps.setInt(7, pessoa.getUsuario().getPerfil().getValorPerfil());
 
 			ps.executeUpdate();
 			ps.close();
