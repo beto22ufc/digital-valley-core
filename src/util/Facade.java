@@ -15,7 +15,6 @@ import dao.PessoaDAO;
 import dao.ServidorDAO;
 import dao.UsuarioDAO;
 import model.Aluno;
-import model.Curso;
 import model.Pessoa;
 import model.Servidor;
 import model.Usuario;
@@ -68,13 +67,14 @@ public class Facade {
 		Pessoa p = pDAO.buscarPorLogin(login);
 		Aluno aluno = DAOFactory.criarAlunoDAO().buscar(p.getId());
 		Servidor servidor = DAOFactory.criarServidorDAO().buscar(p.getId());
-		if (aluno != null) {
+		
+		if(aluno != null){
 			return aluno.getUsuario();
-		} else if (servidor != null) {
+		}else if (servidor != null){
 			return servidor.getUsuario();
 		}
-
-		return null;
+			
+		return p.getUsuario();
 	}
 
 	public static Usuario buscarPorMatriculaAndCPF(String matricula, String cpf) {

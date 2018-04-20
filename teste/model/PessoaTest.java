@@ -33,7 +33,7 @@ public class PessoaTest {
 		Pessoa p = new Pessoa();
 		p.setNome("Deyvison");
 		p.setCpf("12345678910");
-		p.setEmail("teste@email.com");
+		p.setEmail("marilia.mendes@ufc.br");
 		String[] data = "01/12/2000".split("/");
 		System.out.println(data.length);
 		p.setDataNascimento("01/12/2000");
