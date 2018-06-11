@@ -68,10 +68,10 @@ public class Facade {
 		Aluno aluno = DAOFactory.criarAlunoDAO().buscar(p.getId());
 		Servidor servidor = DAOFactory.criarServidorDAO().buscar(p.getId());
 		
-		if(aluno != null){
-			return aluno.getUsuario();
-		}else if (servidor != null){
+		if(servidor != null){
 			return servidor.getUsuario();
+		}else if (aluno != null){
+			return aluno.getUsuario();
 		}
 			
 		return p.getUsuario();

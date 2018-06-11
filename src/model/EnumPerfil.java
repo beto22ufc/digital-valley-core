@@ -44,6 +44,21 @@ public enum EnumPerfil {
 		default:
 			return "";
 		}
+	}
+		
+		public static EnumPerfil EnumByValue(Integer valor){
+			switch(valor){
+			case 1:
+				return EnumPerfil.ADMINISTRADOR;
+			case 2:
+				return EnumPerfil.ALUNO;
+			case 3:
+				return EnumPerfil.SERVIDOR;
+			case 4:
+				return EnumPerfil.VISITANTE;
+			default:
+				return null;
+			}
 	
 	}
 	

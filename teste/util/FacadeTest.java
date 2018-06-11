@@ -1,5 +1,6 @@
 package util;
 import java.util.List;
+
 import org.junit.Ignore;
 import org.junit.Test;
 import model.Aluno;
@@ -61,6 +62,7 @@ public class FacadeTest {
 			System.out.println("tem letras");
 		}
 	}
+	
 	
 	@Test
 	public void crypter() {

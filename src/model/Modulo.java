@@ -9,6 +9,7 @@ public class Modulo implements Serializable{
 	private String titulo;
 	private String url;
 	private String imagem;
+	private String descricao;
 	
 		public Modulo() {
 		super();
@@ -57,4 +58,13 @@ public class Modulo implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	
+	
 }
