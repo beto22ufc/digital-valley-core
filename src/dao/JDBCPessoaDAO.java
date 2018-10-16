@@ -184,7 +184,7 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 	public Usuario buscarPorSiapeAndCPF(String siape, String cpf) {
 		super.open();
 		Pessoa pessoa = new Pessoa();
-		Usuario usuario = null;
+		Usuario usuario = new Ususario();
 		pessoa.setUsuario(usuario);
 
 		String SQL = "SELECT * FROM servidor AS s, pessoa_usuario AS u WHERE s.id_pessoa_usuario = u.id_pessoa_usuario AND s.siape = ? and u.cpf = ?";
@@ -196,7 +196,6 @@ public class JDBCPessoaDAO extends JDBCDAO implements PessoaDAO {
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				usuario = new Usuario();
 				pessoa.setId(rs.getInt("id_pessoa_usuario"));
 				pessoa.setNome(rs.getString("nome"));
 				pessoa.setCpf(rs.getString("cpf"));
