@@ -55,7 +55,7 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		if(senha != null && senha.length() >= 6){
-			this.senha = Crypter.crypt(senha);
+			this.senha = senha;
 		}else{
 			throw new IllegalArgumentException("Erro: O valor da senha não pode ser nulo e deve possuir pelo menos 6 caracteres, valor informado: "+senha);
 		}
